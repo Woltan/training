@@ -22,7 +22,7 @@ def GetArguments(args):
 
 def Erzeuge(teams, output, **kwargs):
 	with open(teams)as f:
-		fTeams = [t for t in f.read().split("\n") if len(t) > 0]
+		fTeams = [t.decode("utf-8") for t in f.read().split("\n") if len(t) > 0]
 	
 	spiele = list(itertools.combinations(fTeams, 2))
 	
@@ -56,7 +56,7 @@ def Erzeuge(teams, output, **kwargs):
 		for i, spieltag in enumerate(spieltage, 1):
 			f.write("{:2}. Spieltag\n".format(i))
 			for tHome, tAway in spieltag:
-				f.write("{1:>{0}} vs. {2:<{0}} {3} : {4}\n".format(tMax, tHome, tAway, random.randint(0, 5), random.randint(0, 4)))
+				f.write(unicode("{1:>{0}} vs. {2:<{0}} {3} : {4}\n").format(tMax, tHome, tAway, random.randint(0, 5), random.randint(0, 4)).encode("utf-8"))
 			f.write("\n")
 
 def Tabelle(saison, **kwargs):
